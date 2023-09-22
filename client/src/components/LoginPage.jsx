@@ -69,8 +69,10 @@ function Homepage({ setIsUserLogged }) {
               className="loginInput"
             />
           </div>
-          {loginUser.username}
-          {loginUser.password}
+          <div className="flex flex-row gap-5 text-sm justify-center text-gray-400">
+            <span>Username: elias</span>
+            <span>Password: cicalino</span>
+          </div>
           <button className="p-3 justify-center" onClick={checkUser}>
             Login
           </button>

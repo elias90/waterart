@@ -1,10 +1,12 @@
 import Header from "./Header";
 
 import { reverseDate } from "../scripts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EntryInfoStats from "./entryInfoStats";
+import axios from "axios";
+import { fetchData } from "../scripts";
 
-function Stats({ clients, entries }) {
+function Stats({ clients, entries, setEntries }) {
   const [entryToView, setEntryToView] = useState([]);
   const [showSidebar, setShowSidebar] = useState(false);
 
@@ -35,6 +37,19 @@ function Stats({ clients, entries }) {
     setEntryToView(el);
     setShowSidebar(true);
   };
+
+  async function deleteEntry(id) {
+    try {
+      const res = await axios.delete(`http://localhost:8020/deleteEntry/${id}`);
+      fetchData(setEntries);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData(setEntries);
+  }, []);
 
   return (
     <>
@@ -115,6 +130,12 @@ function Stats({ clients, entries }) {
                     Note: {entryToView.notes}
                   </li>
                 </ul>
+                <button
+                  className="bg-red-700 p-2 text-xs"
+                  onClick={() => deleteEntry(entryToView._id)}
+                >
+                  Cancella
+                </button>
               </div>
             </div>
           </div>

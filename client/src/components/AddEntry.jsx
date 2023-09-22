@@ -1,6 +1,6 @@
 import Form from "./Form";
 
-function AddEntry({ clients, setCurrentSection }) {
+function AddEntry({ clients, setCurrentSection, setEntries }) {
   return (
     <>
       <section className="fle flex-col p-5 w-full">
@@ -27,7 +27,7 @@ function AddEntry({ clients, setCurrentSection }) {
             Chiudi
           </button>
         </div>
-        <Form clients={clients} />
+        <Form clients={clients} setEntries={setEntries} />
       </section>
     </>
   );

@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchData } from "../scripts";
 
-function Form({ clients, editEntry, action }) {
+function Form({ clients, editEntry, action, setEntries }) {
   const today = new Date().toISOString().split("T")[0];
 
   //
@@ -54,7 +55,8 @@ function Form({ clients, editEntry, action }) {
         formData
       );
       if (response.status === 200) {
-        window.location.reload();
+        fetchData(setEntries);
+        setFormData(getDefaultValues());
       }
     } catch (error) {
       console.log(error);
@@ -72,12 +74,17 @@ function Form({ clients, editEntry, action }) {
         formData
       );
       if (response.status === 200) {
-        window.location.reload();
+        fetchData(setEntries);
+        setFormData(getDefaultValues());
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchData(setEntries);
+  }, []);
 
   return (
     <>
@@ -157,7 +164,7 @@ function Form({ clients, editEntry, action }) {
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6"
+                className="w-6 h-6"
               >
                 <path
                   stroke-linecap="round"

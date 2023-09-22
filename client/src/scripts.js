@@ -1,3 +1,5 @@
+import axios from "axios"
+
 /* Funzione per l'ordinamento delle date */
 
 export function reverseDate(date) {
@@ -21,3 +23,8 @@ export function loginDataError() {
         el.classList.add("bg-red-50")
     })
 }
+
+export async function fetchData(setEntries) {
+    const res = await axios.get("http://localhost:8020/");
+    setEntries(res.data.entries);
+  }

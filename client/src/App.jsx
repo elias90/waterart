@@ -29,7 +29,7 @@ function App() {
     };
 
     fn();
-  }, []);
+  }, [entries, clients]);
 
   return (
     <>
@@ -72,6 +72,7 @@ function App() {
                   entries={entries}
                   clients={clients}
                   setIsUserLogged={setIsUserLogged}
+                  setEntries={setEntries}
                 />
               </ProtectedRoute>
             }
@@ -96,6 +97,7 @@ function App() {
                   entries={entries}
                   clients={clients}
                   setIsUserLogged={setIsUserLogged}
+                  setEntries={setEntries}
                 />
               </ProtectedRoute>
             }

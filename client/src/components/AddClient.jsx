@@ -1,7 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import { fetchData } from "../scripts";
 
-function AddClient({ setShowAddClient }) {
+function AddClient({ setEntries }) {
   const [newClientData, setNewCLientData] = useState({
     name: "",
     surname: "",
@@ -24,7 +25,7 @@ function AddClient({ setShowAddClient }) {
         newClientData
       );
       if (response.status === 200) {
-        window.location.reload();
+        fetchData(setEntries);
       }
     } catch (error) {
       console.log(error);
