@@ -24,7 +24,9 @@ export function loginDataError() {
     })
 }
 
-export async function fetchData(setEntries) {
+/* Funzione per fare il fetch delle entry ad ogni aggiuna o modifica */
+
+export async function fetchData(setType, typeData) {
     const res = await axios.get("http://localhost:8020/");
-    setEntries(res.data.entries);
-  }
+    setType(res.data[typeData]);
+}

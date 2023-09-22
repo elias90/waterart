@@ -47,7 +47,7 @@ function Form({ clients, editEntry, action, setEntries }) {
   };
 
   // Invio la new entry tramite axios
-  async function sendNewEntry(e) {
+  async function sendNewEntry(e, setEntries, entries) {
     e.preventDefault();
     try {
       const response = await axios.post(
@@ -55,7 +55,7 @@ function Form({ clients, editEntry, action, setEntries }) {
         formData
       );
       if (response.status === 200) {
-        fetchData(setEntries);
+        fetchData(setEntries, entries);
         setFormData(getDefaultValues());
       }
     } catch (error) {
@@ -64,7 +64,7 @@ function Form({ clients, editEntry, action, setEntries }) {
   }
 
   // Aggiorno l'entry da modificare tramite axios
-  const updateEntry = async (event) => {
+  const updateEntry = async (event, setEntries, entries) => {
     event.preventDefault();
     const entryId = editEntry._id;
     //console.log(entryId)
@@ -74,7 +74,7 @@ function Form({ clients, editEntry, action, setEntries }) {
         formData
       );
       if (response.status === 200) {
-        fetchData(setEntries);
+        fetchData(setEntries, entries);
         setFormData(getDefaultValues());
       }
     } catch (error) {
@@ -82,8 +82,8 @@ function Form({ clients, editEntry, action, setEntries }) {
     }
   };
 
-  useEffect(() => {
-    fetchData(setEntries);
+  useEffect((setEntries, entries) => {
+    fetchData(setEntries, entries);
   }, []);
 
   return (

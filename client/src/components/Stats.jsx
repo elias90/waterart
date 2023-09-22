@@ -38,17 +38,17 @@ function Stats({ clients, entries, setEntries }) {
     setShowSidebar(true);
   };
 
-  async function deleteEntry(id) {
+  async function deleteEntry(id, setEntries, entries) {
     try {
       const res = await axios.delete(`http://localhost:8020/deleteEntry/${id}`);
-      fetchData(setEntries);
+      fetchData(setEntries, entries);
     } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(() => {
-    fetchData(setEntries);
+  useEffect((setEntries, entries) => {
+    fetchData(setEntries, entries);
   }, []);
 
   return (
