@@ -176,8 +176,6 @@ function Form({ clients, editEntry, action, setEntries }) {
             </button>
           </div>
         </form>
-
-        <div>{formData.typeEntry}</div>
       </div>
     </>
   );

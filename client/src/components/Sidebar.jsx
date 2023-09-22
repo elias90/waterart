@@ -5,6 +5,7 @@ import AddClient from "./AddClient";
 function Sidebar({ clients, entries, setCurrentSection, setClientIdResume }) {
   const [clientsFiltered, setClientsFiltered] = useState([]);
   const [showAddClient, setShowAddClient] = useState(false);
+  const [clientFoundedText, setClientFoundedText] = useState("");
 
   const filterClients = (e) => {
     const clientToFilter = e.target.value.toLowerCase();
@@ -12,6 +13,13 @@ function Sidebar({ clients, entries, setCurrentSection, setClientIdResume }) {
       el.name.toLowerCase().includes(clientToFilter)
     );
     setClientsFiltered(clientFiltered);
+    clientFiltered == ""
+      ? setClientFoundedText("Nessun cliente trovato")
+      : setClientFoundedText(null);
+    const clientsList = document.getElementById("clientList");
+    clientFiltered == ""
+      ? clientsList.classList.add("hidden")
+      : clientsList.classList.remove("hidden");
   };
 
   const numberOfEntries = (id) => {
@@ -56,28 +64,31 @@ function Sidebar({ clients, entries, setCurrentSection, setClientIdResume }) {
               Vedi Tutti
             </span>
           </div>
-          {(clientsFiltered.length > 0 ? clientsFiltered : clients).map(
-            (el) => (
-              <div
-                className="flex flex-row justify-between py-2 border-b cursor-pointer hover:bg-white cursor-pointer"
-                key={el._id}
-                onClick={(e) => resumeClientToShow(e, el._id)}
-              >
-                <span className="text-sm">
-                  {el.name} {el.surname}
-                </span>
-                <span className="flex flex-row items-center justify-center w-6 h-6 bg-slate-200 rounded-full text-xs">
-                  {numberOfEntries(el._id)}
-                </span>
-              </div>
-            )
-          )}
+          <div id="clientList">
+            {(clientsFiltered.length > 0 ? clientsFiltered : clients).map(
+              (el) => (
+                <div
+                  className="flex flex-row justify-between py-2 border-b cursor-pointer hover:bg-white cursor-pointer"
+                  key={el._id}
+                  onClick={(e) => resumeClientToShow(e, el._id)}
+                >
+                  <span className="text-sm">
+                    {el.name} {el.surname}
+                  </span>
+                  <span className="flex flex-row items-center justify-center w-6 h-6 bg-slate-200 rounded-full text-xs">
+                    {numberOfEntries(el._id)}
+                  </span>
+                </div>
+              )
+            )}
+          </div>
+          <span className=" pt-5">{clientFoundedText}</span>
         </div>
       </div>
 
       {showAddClient && (
         <div className="flex-shrink-0 p-5 border-t ">
-          <AddClient setShowAddClient={setShowAddClient}/>
+          <AddClient setShowAddClient={setShowAddClient} />
         </div>
       )}
 
