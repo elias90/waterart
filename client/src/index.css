@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    input, textarea {
+        @apply p-2 px-4 rounded rounded-lg border  border
+    }
+
+    button {
+        @apply flex flex-row items-center bg-black rounded rounded-lg p-2 px-4 text-white text-sm gap-2
+    }
+
+    select {
+        @apply rounded rounded-lg border p-2
+    }
+}
